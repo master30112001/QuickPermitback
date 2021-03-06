@@ -87,12 +87,6 @@ router.get("/viewallstudents", ensureAuthenticated, async (req, res) => {
     studentauthclubs.push(singlestudentauthclubs);
   }
 
-  res.render("admin/viewallstudents", {
-    students: students,
-    studentclubs: studentclubs,
-    studentauthclubs: studentauthclubs,
-    user: user,
-  });
 });
 
 router.get("/addDeleteUser", ensureAuthenticated, (req, res) => {
@@ -173,14 +167,6 @@ router.get("/createNewClub", ensureAuthenticated, async (req, res) => {
   const teachers = await User.find({ position: "Teacher" });
   const teachernames = [];
 
-  for (var i = 0; i < teachers.length; i++) {
-    teachernames.push(teachers[i].name);
-  }
-
-  res.render("admin/clubCreationForm.ejs", {
-    user: req.user,
-    teachernames: teachernames,
-  });
 });
 
 router.post("/savenewclub", ensureAuthenticated, async (req, res) => {
@@ -202,15 +188,7 @@ router.post("/savenewclub", ensureAuthenticated, async (req, res) => {
           {
             $push: { authClubs: { authClub: clubName } },
           },
-          { new: true, runValidators: true }
-        );
-        // console.log(user.name)
-      }
-    }
-    res.render("admin/afterAnimation.hbs");
-  } catch (e) {
-    console.log(e);
-    res.status(404);
+ 
   }
 });
 

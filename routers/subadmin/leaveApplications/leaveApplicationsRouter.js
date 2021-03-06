@@ -94,11 +94,7 @@ router.get(
           });
         }
 
-        res.render("subadmin/teacherLeaveForms", {
-          user: req.user,
-          allforms: rejectedForms,
-        });
-      }
+
 
       if (filter == "all") {
         var allForms = [];
@@ -165,19 +161,7 @@ router.get("/approveLeaveReq/:id", ensureAuthenticated, async (req, res) => {
       }
     }
 
-    res.render("subadmin/openLeaveForm.ejs", {
-      user: req.user,
-      form,
-      teachername,
-      ownercred,
-      sday,
-      smonth,
-      syear,
-      eday,
-      emonth,
-      eyear,
-      disabled,
-    });
+ 
   } catch (e) {
     res.status(404);
     console.log("Error: ", e);
@@ -219,9 +203,7 @@ router.get(
         " to " +
         form.dateto.toString();
       sendEmail(email, "Authorised", emailbody);
-      res.render("subadmin/afterapproved.hbs", {
-        redirectURL: "/teacherdashboard/leaveApplications/pending",
-      });
+
     } catch (e) {
       res.status(404);
       console.log("Error: ", e);
